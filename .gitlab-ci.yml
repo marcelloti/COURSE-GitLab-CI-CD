@@ -1,6 +1,6 @@
 image: node
 build site:
   script:
-    - pwd
-    - whoami
-    - npm --version
+    - cd website
+    - npm install
+    - npm build
