@@ -31,13 +31,13 @@ build site:
     - npm install
     - npm run build
 
-deploy website:
-  stage: deploy
+deploy RC website:
+  stage: staging
   # Local "before_script" overwrites the global "before_script"
   before_script:
     - npm install -g surge
   script:
-    - surge --project ./website/build/course-gitlab-ci-cd/ --domain marcellocosta.surge.sh
+    - surge --project ./website/build/course-gitlab-ci-cd/ --domain marcellocosta-rc.surge.sh
 
   # "after_script" always will be executed (even if "script" fails)
   after_script:
