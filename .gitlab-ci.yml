@@ -1,8 +1,8 @@
 image: node
 
 stages:
-  - build
   - test
+  - package
   - deploy
 
 # Cache for all jobs (don't be confused with "ARTIFACTS"). This cache
@@ -16,8 +16,18 @@ before_script:
   - whoami
   - pwd
 
-build site:
-  stage: build
+test site:
+  stage: test
+  before_script:
+    - npm install -g broken-link-checker wait-on
+  script:
+    - cd website
+    - npm install && npm run start &
+    - wait-on http://localhost:3000/ --timeout 30000
+    - blc --recursive --exclude-external --input http://localhost:3000 website
+
+package site:
+  stage: package
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     # Always export files (even if job fails. Values are: on_success, on_failure, always)
@@ -31,7 +41,7 @@ build site:
     - npm install
     - npm run build
 
-deploy website:
+deploy to staging:
   stage: deploy
   # Local "before_script" overwrites the global "before_script"
   before_script:
