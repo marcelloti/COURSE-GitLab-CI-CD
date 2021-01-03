@@ -8,6 +8,11 @@ stages:
 build site:
   stage: build
   artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    # Always export files (even if job fails. Values are: on_success, on_failure, always)
+    when: always
+    # Expire cache time (from export) - Default 30 days
+    expire_in: 2 hrs
     paths:
       - website/build/course-gitlab-ci-cd
   script:
