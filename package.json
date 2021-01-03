@@ -11,7 +11,7 @@
     "wait-on": "^5.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "wait-on http://localhost:3000/ --timeout 30000"
   },
   "repository": {
     "type": "git",

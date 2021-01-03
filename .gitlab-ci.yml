@@ -21,9 +21,10 @@ test site:
   before_script:
     - npm install -g broken-link-checker wait-on
   script:
+    - npm install
     - cd website
     - npm install && npm run start &
-    - wait-on http://localhost:3000/ --timeout 30000
+    - cd .. && npm run test
     - blc --recursive --exclude-external --input http://localhost:3000 website
 
 package site:
