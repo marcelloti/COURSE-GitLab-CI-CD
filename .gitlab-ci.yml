@@ -41,7 +41,7 @@ deploy RC website:
 
   # "after_script" always will be executed (even if "script" fails)
   after_script:
-    - whoiam
+    - ls -lsrta
 
   environment:
     name: staging
