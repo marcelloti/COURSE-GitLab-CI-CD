@@ -31,7 +31,7 @@ build site:
     - npm install
     - npm run build
 
-deploy RC website:
+deploy website:
   stage: deploy
   # Local "before_script" overwrites the global "before_script"
   before_script:
