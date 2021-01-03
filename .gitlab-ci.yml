@@ -7,9 +7,9 @@ stages:
 
 # Cache for all jobs (don't be confused with "ARTIFACTS"). This cache
 # is used between the jobs.
-cache:
-  paths:
-    - ./website/build/course-gitlab-ci-cd
+#cache:
+#  paths:
+#    - ./website/build/course-gitlab-ci-cd
 
 # Global before EACH scripts
 before_script:
@@ -19,7 +19,7 @@ before_script:
 test site:
   stage: test
   before_script:
-    - npm install -g broken-link-checker wait-on
+    - npm install -g broken-link-checker@^0.7.8 wait-on@^5.2.1
   script:
     - npm install
     - cd website
@@ -30,6 +30,11 @@ test site:
 
 package site:
   stage: package
+  cache:
+    key: site-package
+    policy: push # Don't download cache and push change to be used by the next steps
+    paths:
+      - ./website/build
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     # Always export files (even if job fails. Values are: on_success, on_failure, always)
@@ -43,8 +48,11 @@ package site:
     - npm install
     - npm run build
 
-deploy to staging:
+deploy website:
   stage: deploy
+  cache:
+    key: site-package
+    policy: pull # Get all data from "site-package" key data cache
   # Local "before_script" overwrites the global "before_script"
   before_script:
     - npm install -g surge
