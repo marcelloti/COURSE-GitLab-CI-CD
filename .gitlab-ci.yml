@@ -32,7 +32,7 @@ build site:
     - npm run build
 
 deploy RC website:
-  stage: staging
+  stage: deploy
   # Local "before_script" overwrites the global "before_script"
   before_script:
     - npm install -g surge
