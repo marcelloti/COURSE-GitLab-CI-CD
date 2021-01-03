@@ -12,7 +12,7 @@
     "wait-on": "^5.2.1"
   },
   "scripts": {
-    "scan": "snyk test",
+    "scan": "snyk test --all-projects",
     "test": "wait-on http://localhost:3000/ --timeout 60000"
   },
   "repository": {
