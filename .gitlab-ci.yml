@@ -11,6 +11,11 @@ cache:
   paths:
     - ./website/build/course-gitlab-ci-cd
 
+# Global before EACH scripts
+before_script:
+  - whoami
+  - pwd
+
 build site:
   stage: build
   artifacts:
@@ -28,6 +33,16 @@ build site:
 
 deploy website:
   stage: deploy
-  script:
+  # Local "before_script" overwrites the global "before_script"
+  before_script:
     - npm install -g surge
+  script:
     - surge --project ./website/build/course-gitlab-ci-cd/ --domain marcellocosta.surge.sh
+
+  # "after_script" always will be executed (even if "script" fails)
+  after_script:
+    - whoiam
+
+  environment:
+    name: staging
+    url: http://marcellocosta.surge.sh
