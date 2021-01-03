@@ -28,6 +28,11 @@ test site:
     - cd .. && npm run test
     - blc --recursive --exclude-external --input http://localhost:3000 website
 
+vunerabilities check:
+  stage: test
+  script:
+    - npm install && npm run scan
+
 package site:
   stage: package
   cache:
@@ -55,7 +60,7 @@ deploy website:
     policy: pull # Get all data from "site-package" key data cache
   # Local "before_script" overwrites the global "before_script"
   before_script:
-    - npm install -g surge
+    - npm install -g surge@^0.21.7
   script:
     - surge --project ./website/build/course-gitlab-ci-cd/ --domain marcellocosta-rc.surge.sh
 

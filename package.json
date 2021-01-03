@@ -7,10 +7,12 @@
   "devDependencies": {
     "broken-link-checker": "^0.7.8",
     "docusaurus-init": "^1.14.1",
+    "snyk": "^1.437.3",
     "surge": "^0.21.7",
     "wait-on": "^5.2.1"
   },
   "scripts": {
+    "scan": "snyk test",
     "test": "wait-on http://localhost:3000/ --timeout 60000"
   },
   "repository": {
