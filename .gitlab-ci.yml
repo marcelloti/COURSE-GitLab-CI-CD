@@ -1,7 +1,6 @@
 image: node
 build site:
   script:
-    - ls -lsrta
     - pwd
     - whoami
     - npm --version
