@@ -5,6 +5,12 @@ stages:
   - test
   - deploy
 
+# Cache for all jobs (don't be confused with "ARTIFACTS"). This cache
+# is used between the jobs.
+cache:
+  paths:
+    - ./website/build/course-gitlab-ci-cd
+
 build site:
   stage: build
   artifacts:
@@ -19,3 +25,9 @@ build site:
     - cd website
     - npm install
     - npm run build
+
+deploy website:
+  stage: deploy
+  script:
+    - npm install -g surge
+    - surge --project ./website/build/course-gitlab-ci-cd/ --domain marcellocosta.surge.sh

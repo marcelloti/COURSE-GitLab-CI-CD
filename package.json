@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "docusaurus-init": "^1.14.1"
+    "docusaurus-init": "^1.14.1",
+    "surge": "^0.21.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
