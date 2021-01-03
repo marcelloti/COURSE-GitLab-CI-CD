@@ -6,7 +6,7 @@ stages:
   - deploy
 
 build site:
-  state: build
+  stage: build
   script:
     - cd website
     - npm install
