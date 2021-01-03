@@ -45,4 +45,8 @@ deploy website:
 
   environment:
     name: staging
-    url: http://marcellocosta.surge.sh
+    url: http://marcellocosta-rc.surge.sh
+
+  # Runs only in branch "develop" (can use Regex)
+  only:
+    - develop
