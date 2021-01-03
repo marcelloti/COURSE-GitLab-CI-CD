@@ -23,7 +23,8 @@ test site:
   script:
     - npm install
     - cd website
-    - npm install && npm run start &
+    - npm install
+    - npm run start
     - cd .. && npm run test
     - blc --recursive --exclude-external --input http://localhost:3000 website
 
